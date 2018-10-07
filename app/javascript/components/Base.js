@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from './Header';
+import Product from './Product';
+
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -9,16 +11,25 @@ class Base extends React.Component {
     console.log(this.props.variations);
     this.state = {
       product: this.props.product,
+      variations: this.props.variations,
       numItemsInCart: 0
     };
+  }
+
+  handleCartItemsChange(number) {
+    this.setState({ numItemsInCart: number });
   }
 
   render() {
     return (
       <React.Fragment>
         <Header numItemsInCart={this.state.numItemsInCart} />
-        <section className="section">
-          <p>{this.state.product.name}</p>
+        <section>
+          <Product
+            product={this.state.product}
+            variations={this.state.variations}
+            onCartChange={this.handleCartItemsChange}
+          />
         </section>
       </React.Fragment>
     );

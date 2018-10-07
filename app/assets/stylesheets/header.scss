@@ -1,12 +1,13 @@
 @import 'colors';
 
-.header {
-  background: #749fb4;
-  padding-bottom: 1%;
-  padding-top: 1%;
-  color: $white;
+nav.header {
+  // background: #749fb4;
+  margin-top: 1.5rem;
+  // padding-bottom: 1%;
+  // padding-top: 1%;
+  // color: $white;
   .subtitle {
-    color: $white;
+    // color: $white;
   }
   .level-left {
     margin-left: 1%;
@@ -14,6 +15,9 @@
   .level-right {
     margin-right: 1%;
   }
+  // .level:not(:last-child) {
+  //   margin-bottom: 0;
+  // }
   .shopping-cart-text {
     color: #f9745f;
     text-align: center;
