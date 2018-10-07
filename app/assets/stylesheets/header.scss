@@ -1,0 +1,21 @@
+@import 'colors';
+
+.header {
+  background: #749fb4;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  color: $white;
+  .subtitle {
+    color: $white;
+  }
+  .level-left {
+    margin-left: 1%;
+  }
+  .level-right {
+    margin-right: 1%;
+  }
+  .shopping-cart-text {
+    color: #f9745f;
+    text-align: center;
+  }
+}
