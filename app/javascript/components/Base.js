@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import Header from './Header';
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,14 @@ class Base extends React.Component {
   }
 
   render() {
-    return <p>{this.state.product.name}</p>;
+    return (
+      <React.Fragment>
+        <Header numItemsInCart={this.state.numItemsInCart} />
+        <section className="section">
+          <p>{this.state.product.name}</p>
+        </section>
+      </React.Fragment>
+    );
   }
 }
 Base.propTypes = {
