@@ -7,8 +7,7 @@ import Product from './Product';
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.product);
-    console.log(this.props.variations);
+    this.handleCartItemsChange = this.handleCartItemsChange.bind(this);
     this.state = {
       product: this.props.product,
       variations: this.props.variations,
@@ -16,8 +15,12 @@ class Base extends React.Component {
     };
   }
 
-  handleCartItemsChange(number) {
-    this.setState({ numItemsInCart: number });
+  handleCartItemsChange(selectedVariation) {
+    // TODO: Build Cart Model so we have a place to send our selectedVariation
+    const numItems = this.state.numItemsInCart + 1;
+    this.setState({
+      numItemsInCart: numItems
+    });
   }
 
   render() {

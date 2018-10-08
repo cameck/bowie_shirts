@@ -1,5 +1,10 @@
 .product-hero {
   background: #e8e8e8;
+  height: 100vh;
+  .description-holder {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   .section {
     padding: 0;
   }
