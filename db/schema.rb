@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2018_10_07_180108) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "product_variations", force: :cascade do |t|
-    t.integer "product_id"
+    t.bigint "product_id"
     t.string "color"
     t.string "size"
     t.integer "stock"
@@ -31,4 +34,5 @@ ActiveRecord::Schema.define(version: 2018_10_07_180108) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "product_variations", "products"
 end
