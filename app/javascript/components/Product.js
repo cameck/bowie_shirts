@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // TODO: Do this server side so the client isn't bogged down with it
-//       Also break up all the individual components in this monster
+// TODO: Break up all the individual components in this monster
 const uniquePossibilities = (arr, value) => {
   return Array.from(new Set(arr.map(a => a[value])));
 };
@@ -26,22 +26,46 @@ const mapVariationsObj = variations => {
   return mappedVars;
 };
 
+const findSelection = (allVariations, selectedVariation, isColor, item) => {
+  return allVariations.find(variation => {
+    if (isColor) {
+      return (
+        variation.color === item && selectedVariation.size === variation.size
+      );
+    } else {
+      return (
+        variation.color === selectedVariation.color && variation.size === item
+      );
+    }
+  });
+};
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
-    console.log('product: ', this.props.product);
-    console.log('variations;', this.props.variations);
-    const uniqueColors = uniquePossibilities(this.props.variations, 'color');
-    const mappedVars = mapVariationsObj(this.props.variations);
-    console.log('yolo: ', mappedVars);
     this.state = {
       selectedVariation: this.props.variations[0],
-      possibleColors: uniqueColors,
-      possibleSizes: uniquePossibilities(this.props.variations, 'size'),
-      mappedVars: mappedVars
+      possibleColors: uniquePossibilities(this.props.variations, 'color'),
+      mappedVars: mapVariationsObj(this.props.variations)
     };
     console.log(this.state);
   }
+
+  handleVariationChange(item, e) {
+    e.preventDefault();
+
+    const isColor = this.state.possibleColors.includes(item);
+
+    this.setState({
+      selectedVariation: findSelection(
+        this.props.variations,
+        this.state.selectedVariation,
+        isColor,
+        item
+      )
+    });
+  }
+
   render() {
     return (
       <div className="product-hero">
@@ -57,6 +81,7 @@ class Product extends React.Component {
             </div>
             <div className="container">
               <h1 className="title">{this.props.product.name} </h1>
+              <h2 className="subtitle">${this.props.product.price}</h2>
               <div className="level">
                 <div className="level-left">
                   {this.state.possibleColors.map((color, i) => {
@@ -70,7 +95,12 @@ class Product extends React.Component {
                         }
                         key={i}
                       >
-                        {color}
+                        <a
+                          className="button is-text"
+                          onClick={e => this.handleVariationChange(color, e)}
+                        >
+                          {color}
+                        </a>
                       </div>
                     );
                   })}
@@ -91,11 +121,21 @@ class Product extends React.Component {
                           key={i}
                         >
                           {' '}
-                          {variation.size}{' '}
+                          <a
+                            className="button is-text"
+                            onClick={e =>
+                              this.handleVariationChange(variation.size, e)
+                            }
+                          >
+                            {variation.size}
+                          </a>{' '}
                         </div>
                       );
                     })}
                   </div>
+                </div>
+                <div className="level-right">
+                  <button className="button is-link">Add To Bag</button>
                 </div>
               </div>
               <p>

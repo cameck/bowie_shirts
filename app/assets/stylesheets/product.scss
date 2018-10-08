@@ -5,10 +5,23 @@
   }
   .image img {
     margin: 0 auto;
-    max-width: 50%;
+    max-width: 40%;
+  }
+  .subtitle:not(:last-child) {
+    margin-bottom: 0.5%;
+  }
+  .title:not(:last-child) {
+    margin-bottom: 1rem;
   }
   .selected-item {
-    font-weight: bold;
     text-decoration: underline;
+  }
+  .button.is-text {
+    padding: 0.25em;
+    text-decoration: none;
+    &:hover {
+      background-color: transparent;
+      text-decoration: underline;
+    }
   }
 }
